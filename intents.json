@@ -1,0 +1,1257 @@
+{
+  "intents": [
+    {
+      "tag": ["greet", "welcome"],
+      "patterns": [
+        "Hello", "Hi", "Hey", "Good morning", "Good afternoon", "Greetings",
+        "What's up", "Yo", "Hello there", "Hi there", "Howdy", "Hey hey",
+        "Hiya", "Heya", "Hello hello", "Hi hi", "Hey there", "Good day",
+        "hello!", "HELLO", "hi!", "hola", "salutations", "hey there!", "hi there!",
+        "Heyy", "Helloo", "Hiii", "Good evening", "Heya there", "What's good?",
+        "Hi ya", "Heyo", "Hello all", "Hi everyone", "Hey folks", "Greetings all",
+        "Hey there folks", "Hello everyone", "Hi all", "Good to see you",
+        "Hey there everyone", "Hello friends", "Hi folks", "Hey everyone",
+        "Good to meet you", "Hey there team", "Hello team", "Hi team",
+        "Hey all", "Greetings everyone", "Hi there everyone", "Hey there all",
+        "Hello everyone there", "Hi there all", "Hey there everyone there",
+        "Hello there everyone", "Hi there everyone there", "Hey there all there"
+      ],
+      "responses": [
+        "Hello! Welcome to our service platform. How can I assist you today?",
+        "Hi there! Thanks for reaching out. What can I help you with?",
+        "Hey! Great to see you. How can I assist you today?",
+        "Greetings! I’m here to help. What would you like to explore?",
+        "Hello there! I’m your AI assistant. What can I do for you today?"
+      ],
+      "quick_replies": [
+        {"text": "Learn about services", "next_intent": "ask_services"},
+        {"text": "Check pricing", "next_intent": "ask_pricing"},
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Get support", "next_intent": "ask_support"},
+        {"text": "Tell me about features", "next_intent": "ask_features"},
+        {"text": "View FAQs", "next_intent": "show_faqs"},
+        {"text": "Explore use cases", "next_intent": "ask_use_cases"},
+        {"text": "Check testimonials", "next_intent": "show_testimonials"}
+      ],
+      "context": {"set": "initial_greeting"}
+    },
+    {
+      "tag": ["ask_services", "offerings"],
+      "patterns": [
+        "What services do you offer?", "Tell me about your services",
+        "What do you provide?", "What are your solutions?",
+        "I need to know about the services", "Can you tell me about your offerings?",
+        "Tell me about what you do", "What services do you have?",
+        "What kind of services are available?", "Give me details on your services",
+        "What’s your service lineup?", "What can you do for me?",
+        "What solutions do you have?", "Tell me about your products",
+        "What do you offer for businesses?", "What are your main services?",
+        "Can you list your services?", "What services do you support?",
+        "What’s included in your services?", "Tell me about your platform",
+        "What are your offerings?", "What business solutions do you have?",
+        "What can your platform do?", "What services can I use?",
+        "Tell me about your AI solutions", "What’s your service portfolio?",
+        "What AI tools do you offer?", "What are your business services?",
+        "Tell me about your AI platform", "What services do you provide?",
+        "What solutions are available?", "What does your platform offer?",
+        "What are the services you have?", "What AI services do you offer?",
+        "Tell me about your business tools", "What can I use your platform for?",
+        "What services are there?", "What does your company provide?",
+        "What AI solutions do you have?", "What are your platform services?"
+      ],
+      "responses": [
+        "We offer AI-powered solutions including CRM integration, analytics, custom dashboards, and automation tools.",
+        "Our services include CRM integration, real-time analytics, customizable dashboards, and workflow automation.",
+        "We provide AI-driven tools like analytics, CRM integration, custom dashboards, and automation for businesses.",
+        "Our platform offers a range of services such as AI analytics, CRM integration, tailored dashboards, and automation."
+      ],
+      "quick_replies": [
+        {"text": "Key features", "next_intent": "ask_features"},
+        {"text": "Pricing", "next_intent": "ask_pricing"},
+        {"text": "Learn about integrations", "next_intent": "integration_query"},
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "How does it work?", "next_intent": "how_it_works"},
+        {"text": "Explore use cases", "next_intent": "ask_use_cases"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {"set": "services_discussed"}
+    },
+    {
+      "tag": "ask_pricing",
+      "patterns": [
+        "What are your pricing plans?", "Tell me the cost",
+        "How much does it cost?", "What’s the price?",
+        "Can you share pricing details?", "How much is it?",
+        "Need to know the pricing", "Tell me about pricing",
+        "What is the pricing?", "How much do you charge?",
+        "What are the fees?", "Pricing information please",
+        "What’s the cost of your services?", "How much for the plans?",
+        "Can you tell me the pricing?", "What’s your pricing structure?",
+        "How much does it cost to use?", "What are your rates?",
+        "Tell me about your pricing options", "How much for the service?",
+        "What’s the pricing for your plans?", "How much for analytics?",
+        "What’s the cost for CRM?", "Pricing details please",
+        "Tell me about subscription costs", "What’s your pricing model?",
+        "How much for your platform?", "What are the subscription fees?",
+        "How much for a plan?", "What’s the cost for dashboards?",
+        "Tell me about billing", "How much for automation tools?",
+        "What’s the price for your services?", "How much for integrations?",
+        "What are the costs?", "How much does your platform cost?",
+        "What’s the pricing for analytics?", "How much for CRM tools?",
+        "Tell me about your rates", "What’s the cost for a subscription?"
+      ],
+      "responses": [
+        "Our pricing varies by service and business size. We offer plans for small businesses, enterprises, and custom solutions.",
+        "We have flexible pricing based on your needs, with options for small businesses, enterprises, and custom plans.",
+        "Pricing depends on the service and scale—we have plans for small teams, enterprises, and tailored solutions.",
+        "Our plans are tailored to your needs, with options for small businesses, enterprises, and custom pricing."
+      ],
+      "quick_replies": [
+        {"text": "Small business plans", "next_intent": "pricing_small_business"},
+        {"text": "Enterprise plans", "next_intent": "pricing_enterprise"},
+        {"text": "Request a quote", "next_intent": "ask_demo"},
+        {"text": "Back to services", "next_intent": "ask_services"},
+        {"text": "Are there any discounts?", "next_intent": "ask_discounts"},
+        {"text": "Billing inquiries", "next_intent": "billing_inquiry"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "pricing_inquired",
+        "follow_up": ["ask_demo", "ask_features", "ask_discounts", "billing_inquiry"]
+      }
+    },
+    {
+      "tag": "pricing_small_business",
+      "patterns": [
+        "Tell me about small business plans", "Small business pricing",
+        "What’s the cost for small businesses?", "Pricing for small teams",
+        "How much for a small business?", "Small team pricing",
+        "What’s the price for small companies?", "Small business plan details",
+        "Pricing for startups", "Cost for small firms",
+        "What’s the small business package?", "Small business subscription",
+        "How much for small teams?", "Small business cost details",
+        "Pricing for small organizations", "Small business plan info",
+        "What’s the price for startups?", "How much for a small firm?",
+        "Tell me about startup plans", "What’s the cost for small teams?",
+        "Small business pricing info", "How much for a small company?",
+        "What’s the small business rate?", "Small business plan pricing",
+        "Cost for small organizations", "Pricing for small businesses",
+        "What’s the small team package?", "How much for small firms?",
+        "Small business subscription cost", "Tell me about small team plans"
+      ],
+      "responses": [
+        "Our small business plans start with basic analytics and CRM features, perfect for teams under 50.",
+        "For small businesses, we offer plans with core analytics and CRM integration, ideal for teams up to 50.",
+        "Small business plans include essential analytics and CRM tools, designed for teams of up to 50 members.",
+        "Our small business package provides analytics and CRM features, tailored for teams under 50."
+      ],
+      "quick_replies": [
+        {"text": "Schedule a demo", "next_intent": "ask_demo"},
+        {"text": "Back to services", "next_intent": "ask_services"},
+        {"text": "Compare with enterprise", "next_intent": "pricing_enterprise"},
+        {"text": "Any discounts available?", "next_intent": "ask_discounts"},
+        {"text": "Billing inquiries", "next_intent": "billing_inquiry"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "requires": ["pricing_inquired"],
+        "set": "small_business_pricing"
+      }
+    },
+    {
+      "tag": "pricing_enterprise",
+      "patterns": [
+        "Tell me about enterprise plans", "Enterprise pricing",
+        "What’s the cost for enterprises?", "Pricing for large companies",
+        "How much for enterprise plans?", "Enterprise plan pricing",
+        "What’s the price for big companies?", "Enterprise plan details",
+        "Pricing for corporations", "Cost for large firms",
+        "What’s the enterprise package?", "Enterprise subscription",
+        "How much for large teams?", "Enterprise cost details",
+        "Pricing for big organizations", "Enterprise plan info",
+        "What’s the price for corporations?", "How much for a large firm?",
+        "Tell me about corporate plans", "What’s the cost for big teams?",
+        "Enterprise pricing info", "How much for a large company?",
+        "What’s the enterprise rate?", "Enterprise plan pricing",
+        "Cost for large organizations", "Pricing for enterprises",
+        "What’s the big team package?", "How much for large firms?",
+        "Enterprise subscription cost", "Tell me about large team plans"
+      ],
+      "responses": [
+        "Enterprise plans include advanced analytics, full customization, dedicated support, and priority onboarding.",
+        "Our enterprise plans offer advanced analytics, complete customization, 24/7 dedicated support, and priority onboarding.",
+        "For enterprises, we provide plans with advanced analytics, full customization, priority support, and dedicated onboarding.",
+        "Our enterprise package comes with advanced analytics, customization, dedicated support, and priority onboarding."
+      ],
+      "quick_replies": [
+        {"text": "Schedule a demo", "next_intent": "ask_demo"},
+        {"text": "Back to services", "next_intent": "ask_services"},
+        {"text": "Compare with small business", "next_intent": "pricing_small_business"},
+        {"text": "Any discounts available?", "next_intent": "ask_discounts"},
+        {"text": "Billing inquiries", "next_intent": "billing_inquiry"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "requires": ["pricing_inquired"],
+        "set": "enterprise_pricing"
+      }
+    },
+    {
+      "tag": "ask_demo",
+      "patterns": [
+        "Can I get a demo?", "I want to schedule a demo",
+        "Show me a demo", "Book a demo", "Demo request",
+        "Can you demo the product?", "I’d like a demonstration",
+        "Schedule a demo for me", "Can I see a demo?",
+        "I want to see a demo", "Let’s book a demo",
+        "Can you show me how it works?", "I’d like to see a demo",
+        "Request a demo please", "Can I have a product demo?",
+        "I need a demo", "Can you arrange a demo?",
+        "Show me how it works", "I’d like a product tour",
+        "Can I get a walkthrough?", "I want a demo now",
+        "Can you give me a demo?", "Schedule a product demo",
+        "I’d like a platform demo", "Can I book a demo?",
+        "I need to see a demo", "Show me a product demo",
+        "Can you demo the platform?", "I’d like a demo session",
+        "Arrange a demo for me", "Can I have a demo?",
+        "I want a walkthrough", "Can you show me a demo?",
+        "I’d like to schedule a demo", "Can I see how it works?"
+      ],
+      "responses": [
+        "I’d be happy to help you schedule a demo! Please provide your name, email address, and preferred date.",
+        "Let’s get a demo scheduled for you! Can you share your name, email address, and a suitable date?",
+        "Great, I can arrange a demo! Please provide your full name, email address, and preferred date.",
+        "I’ll help you set up a demo! Could you please provide your name, email, and a date that works for you?"
+      ],
+      "form_fields": [
+        {"field": "name", "prompt": "What’s your full name?"},
+        {"field": "email", "prompt": "What’s your email address?"},
+        {"field": "date", "prompt": "Preferred date (e.g., YYYY-MM-DD)"}
+      ],
+      "entities": [
+        {"type": "name", "regex": "[A-Za-z ]+"},
+        {"type": "email", "regex": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"},
+        {"type": "date", "regex": "\\d{4}-\\d{2}-\\d{2}"}
+      ],
+      "quick_replies": [
+        {"text": "Submit details", "action": "submit_form"},
+        {"text": "Talk to a human", "next_intent": "escalate_to_human"},
+        {"text": "Not now", "next_intent": "greet"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "demo_requested",
+        "follow_up": ["thankyou"]
+      }
+    },
+    {
+      "tag": "ask_support",
+      "patterns": [
+        "I need help", "Support please", "I’m facing an issue",
+        "Can you help me?", "I have a problem", "Technical support",
+        "I need assistance", "Help me with an issue",
+        "I’m having trouble", "Can you assist me?",
+        "I need tech support", "Facing a problem",
+        "Help with a problem", "I need customer support",
+        "Can you fix my issue?", "Support team please",
+        "I’m stuck", "Need help with something",
+        "Can you help with a problem?", "I need support now",
+        "Help me troubleshoot", "I need assistance now",
+        "Can you solve my issue?", "I’m having an issue",
+        "Support help please", "I need help with something",
+        "Can you assist with a problem?", "I need technical help",
+        "I’m facing a technical issue", "Can you help me out?",
+        "I need support assistance", "Help me with a technical issue",
+        "I’m having a technical problem", "Can you fix my problem?",
+        "I need help with a bug", "Support for an issue please"
+      ],
+      "responses": [
+        "I’m here to assist! Please describe your issue, or I can connect you with our support team.",
+        "Let’s get that sorted! Can you tell me more about your issue, or should I connect you to support?",
+        "I’m happy to help! Please explain your problem, or I can get you in touch with our support team.",
+        "I’ll do my best to help! What issue are you facing, or would you like to contact support?"
+      ],
+      "quick_replies": [
+        {"text": "Contact support", "next_intent": "provide_support_contact"},
+        {"text": "Chat with an agent", "next_intent": "escalate_to_human"},
+        {"text": "View FAQs", "next_intent": "show_faqs"},
+        {"text": "Troubleshooting guide", "next_intent": "troubleshoot_issue"},
+        {"text": "Describe my issue", "next_intent": "describe_issue"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "support_inquired",
+        "follow_up": ["escalate_to_human", "provide_support_contact", "describe_issue", "troubleshoot_issue"]
+      }
+    },
+    {
+      "tag": "ask_features",
+      "patterns": [
+        "What are the features?", "Tell me about key features",
+        "What does it include?", "What are the main features?",
+        "Can you list the features?", "What features do you offer?",
+        "Tell me about the features", "What’s included in the platform?",
+        "What are your product features?", "List the key features",
+        "What features come with it?", "Tell me about platform features",
+        "What are the benefits?", "What does the service include?",
+        "What features are available?", "What’s in the platform?",
+        "Tell me about the tools", "What capabilities do you have?",
+        "What are the platform’s features?", "Tell me about your functionality",
+        "What features does it have?", "What’s included in your platform?",
+        "Tell me about your platform tools", "What are your key functionalities?",
+        "What does your platform include?", "What features can I use?",
+        "Tell me about platform capabilities", "What are your service features?",
+        "What tools are available?", "What’s in your platform?",
+        "Tell me about your platform benefits", "What features do you support?",
+        "What are the platform tools?", "What functionality do you offer?",
+        "Tell me about your platform services", "What are your platform features?"
+      ],
+      "responses": [
+        "Our platform offers real-time analytics, custom dashboards, API access, seamless third-party integrations, and automation tools.",
+        "We provide features like real-time analytics, customizable dashboards, API access, easy integrations, and workflow automation.",
+        "Key features include real-time analytics, custom dashboards, API access, support for third-party integrations, and automation.",
+        "You’ll get real-time analytics, custom dashboards, API access, integrations, and automation with our platform."
+      ],
+      "quick_replies": [
+        {"text": "Learn about integrations", "next_intent": "integration_query"},
+        {"text": "Check pricing", "next_intent": "ask_pricing"},
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Customization options", "next_intent": "customization_query"},
+        {"text": "How does it work?", "next_intent": "how_it_works"},
+        {"text": "Analytics details", "next_intent": "analytics_query"},
+        {"text": "Dashboard features", "next_intent": "dashboard_query"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "features_explained",
+        "requires": ["services_discussed"],
+        "follow_up": ["integration_query", "customization_query", "how_it_works", "analytics_query", "dashboard_query"]
+      }
+    },
+    {
+      "tag": "customization_query",
+      "patterns": [
+        "Can I customize it?", "Do you support customization?",
+        "Is it customizable?", "Can I tailor it to my needs?",
+        "Custom solution options", "Can I personalize the platform?",
+        "How customizable is it?", "Can I make it custom?",
+        "Does it support custom features?", "Can I adjust it for my business?",
+        "Is there customization available?", "Can I personalize it?",
+        "Custom options please", "Can I modify the platform?",
+        "Tell me about customization", "Can I tweak the platform?",
+        "Does it allow customization?", "Can I customize the dashboard?",
+        "Tell me about custom solutions", "Is customization possible?",
+        "Can I customize my dashboard?", "Does it support custom dashboards?",
+        "Can I tailor the platform?", "Is there custom support?",
+        "Can I adjust the platform?", "Tell me about custom options",
+        "Can I personalize my dashboard?", "Does it allow custom features?",
+        "Can I modify my dashboard?", "Tell me about platform customization"
+      ],
+      "responses": [
+        "Absolutely, our platform supports full customization to meet your business requirements.",
+        "Yes, you can fully customize the platform to fit your specific business needs.",
+        "Our platform is highly customizable, allowing you to tailor it to your requirements.",
+        "You can definitely customize the platform to suit your business—everything from dashboards to workflows!"
+      ],
+      "quick_replies": [
+        {"text": "Learn more about customization", "next_intent": "customization_details"},
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to features", "next_intent": "ask_features"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "customization_inquired",
+        "follow_up": ["ask_demo", "customization_details"]
+      }
+    },
+    {
+      "tag": "integration_query",
+      "patterns": [
+        "Can this integrate with my tools?", "Does it support Slack or Zapier?",
+        "What integrations do you support?", "Can it connect to my apps?",
+        "Integration options", "Does it work with other software?",
+        "Can it integrate with Slack?", "Does it support Zapier?",
+        "What apps can it connect to?", "Tell me about integrations",
+        "Can I connect it to my tools?", "Does it integrate with Salesforce?",
+        "What are the integration options?", "Can it work with my software?",
+        "Tell me about app integrations", "Can it connect with my CRM?",
+        "Does it support Google Workspace?", "Can it integrate with my apps?",
+        "What tools does it work with?", "Tell me about software integrations",
+        "Can it integrate with Microsoft Teams?", "Does it support HubSpot?",
+        "Can it connect to my apps?", "What integrations are available?",
+        "Tell me about tool integrations", "Does it work with my CRM?",
+        "Can it integrate with Google Drive?", "Does it support Trello?",
+        "What software does it integrate with?", "Tell me about platform integrations"
+      ],
+      "responses": [
+        "Yes, we support integrations with Slack, Zapier, Salesforce, Google Workspace, Microsoft Teams, and many other tools.",
+        "Our platform integrates with tools like Slack, Zapier, Salesforce, Google Workspace, Microsoft Teams, and more.",
+        "We offer integrations with popular tools including Slack, Zapier, Salesforce, Google Workspace, and Microsoft Teams.",
+        "You can integrate with tools like Slack, Zapier, Salesforce, Google Workspace, Microsoft Teams, and many others."
+      ],
+      "quick_replies": [
+        {"text": "View all integrations", "next_intent": "list_integrations"},
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to features", "next_intent": "ask_features"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "integrations_inquired",
+        "follow_up": ["ask_demo", "list_integrations"]
+      }
+    },
+    {
+      "tag": "thankyou",
+      "patterns": [
+        "Thanks", "Thank you", "Bye", "Goodbye",
+        "Appreciate it", "See you", "Ok thanks",
+        "Thanks a lot", "See you later",
+        "Thank you so much", "Thanks bye", "Good bye",
+        "Thanks for the help", "See ya", "Catch you later",
+        "Thanks for your help", "Bye bye", "Thank you!",
+        "Thanks so much", "Later", "Take care",
+        "Thanks and bye", "Appreciate your help",
+        "Thanks for assisting", "Goodbye for now",
+        "Thank you very much", "Thanks a ton",
+        "See you soon", "Thanks for everything",
+        "Thank you for helping", "Bye for now",
+        "Thanks for the support", "Catch you soon",
+        "Thank you for assistance", "Thanks again",
+        "See you around", "Thanks for all the help"
+      ],
+      "responses": [
+        "You’re very welcome! Feel free to reach out if you need more help. Goodbye!",
+        "Glad I could help! Reach out anytime. Bye!",
+        "Goodbye! If you need assistance later, I’ll be here!",
+        "You’re welcome! Come back anytime. Take care!"
+      ],
+      "quick_replies": [
+        {"text": "Start over", "next_intent": "greet"},
+        {"text": "Contact support", "next_intent": "provide_support_contact"},
+        {"text": "View FAQs", "next_intent": "show_faqs"},
+        {"text": "Provide feedback", "next_intent": "provide_feedback"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "conversation_closed"
+      }
+    },
+    {
+      "tag": "fallback",
+      "patterns": [],
+      "responses": [
+        "Sorry, I didn’t understand that. Could you please rephrase, or would you like to explore other options?",
+        "I’m not sure I understood that. Can you clarify, or should I connect you to a live agent?",
+        "I didn’t quite get that. Can you rephrase, or would you like to chat with a live agent?",
+        "Hmm, I’m not sure about that. Can you try again, or should I get you some help?"
+      ],
+      "quick_replies": [
+        {"text": "Try again", "action": "retry_input"},
+        {"text": "Talk to a human", "next_intent": "escalate_to_human"},
+        {"text": "View FAQs", "next_intent": "show_faqs"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "escalation": {
+        "after_attempts": 2,
+        "next_intent": "escalate_to_human"
+      },
+      "context": {
+        "set": "fallback_triggered"
+      }
+    },
+    {
+      "tag": "escalate_to_human",
+      "patterns": [
+        "Talk to a human", "I want to speak to someone",
+        "Connect me to an agent", "Live chat please",
+        "Can I talk to a person?", "I need a real person",
+        "Speak to an agent", "I want to talk to a human",
+        "Can I chat with someone?", "Connect me to support",
+        "I need to speak with a real person", "Human support please",
+        "Talk to someone now", "I want a live agent",
+        "Can I speak to a human?", "Get me a real person",
+        "I need to talk to support", "Live support please",
+        "I want to speak to an agent", "Can I talk to support?",
+        "Connect me to a human", "I need a live person",
+        "Speak to a human please", "I want to chat with an agent",
+        "Can I speak to someone?", "I need a human agent",
+        "Talk to a live agent", "I want to talk to a person",
+        "Can I chat with a human?", "Connect me to a live agent"
+      ],
+      "responses": [
+        "I’m connecting you to a live agent. Please hold for a moment, or you can email support@example.com.",
+        "Let me connect you to a live agent. One moment, or you can email support@example.com.",
+        "I’ll get you to a live agent shortly. Alternatively, you can email support@example.com.",
+        "Connecting you to a live agent now. You can also reach out via support@example.com."
+      ],
+      "quick_replies": [
+        {"text": "Email support", "next_intent": "provide_support_contact"},
+        {"text": "Back to menu", "next_intent": "greet"},
+        {"text": "View FAQs", "next_intent": "show_faqs"}
+      ],
+      "context": {
+        "set": "escalated"
+      }
+    },
+    {
+      "tag": "show_faqs",
+      "patterns": [
+        "View FAQs", "Show me the FAQs", "Can I see the FAQs?",
+        "Where are the FAQs?", "I want to see FAQs",
+        "Tell me about FAQs", "Show FAQs please",
+        "Can you show the FAQs?", "I need the FAQs",
+        "View frequently asked questions", "Show FAQ list",
+        "Can I see the FAQ?", "Where can I find FAQs?",
+        "I want to view FAQs", "Tell me about the FAQs",
+        "Show me FAQ details", "Can you display the FAQs?",
+        "I need to see the FAQs", "Show frequently asked questions",
+        "Can I view the FAQ list?", "Where are the frequently asked questions?",
+        "I want to see the FAQ list", "Tell me about frequently asked questions",
+        "Show me the FAQ page", "Can you show me the FAQ list?",
+        "I need to view the FAQs", "Show the FAQ section",
+        "Can I see frequently asked questions?", "Where’s the FAQ section?",
+        "I want to check the FAQs"
+      ],
+      "responses": [
+        "Here are some frequently asked questions:\n- **How do I get started?** Sign up and follow the onboarding steps.\n- **What’s included in the free plan?** Basic analytics and limited CRM features.\n- **How can I contact support?** Email us at support@example.com.\n- **What integrations are supported?** We integrate with Slack, Zapier, Salesforce, and more.\nWould you like more details on any of these?",
+        "Here’s a quick look at our FAQs:\n- **How do I get started?** Sign up and follow the onboarding steps.\n- **What’s in the free plan?** Basic analytics and limited CRM features.\n- **How to contact support?** Email support@example.com.\n- **What integrations are supported?** We support Slack, Zapier, Salesforce, and more.\nNeed more info on any topic?",
+        "Check out our FAQs:\n- **How do I get started?** Sign up and follow the onboarding steps.\n- **What does the free plan include?** Basic analytics and limited CRM features.\n- **How do I reach support?** Email support@example.com.\n- **What integrations are supported?** We integrate with Slack, Zapier, Salesforce, and more.\nLet me know if you’d like to dive deeper!"
+      ],
+      "quick_replies": [
+        {"text": "How to get started", "next_intent": "faq_get_started"},
+        {"text": "Free plan details", "next_intent": "faq_free_plan"},
+        {"text": "Contact support", "next_intent": "provide_support_contact"},
+        {"text": "Integration FAQs", "next_intent": "faq_integrations"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "faqs_viewed",
+        "follow_up": ["faq_get_started", "faq_free_plan", "provide_support_contact", "faq_integrations"]
+      }
+    },
+    {
+      "tag": "provide_support_contact",
+      "patterns": [
+        "Contact support", "How to contact support?",
+        "Email support", "How do I reach support?",
+        "Support email", "I need to email support",
+        "How can I contact support?", "Support contact details",
+        "What’s the support email?", "How do I get support?",
+        "Reach support team", "Where can I contact support?",
+        "I need support contact", "Tell me support email",
+        "How to email support?", "Support team email",
+        "How do I reach the support team?", "Support contact info",
+        "What’s the email for support?", "How to get support?",
+        "Can I email support?", "Where’s the support email?",
+        "I need to contact support", "Tell me how to reach support",
+        "How can I email support?", "Support team contact",
+        "How do I get in touch with support?", "Support email address",
+        "What’s the contact for support?", "How to reach support team?"
+      ],
+      "responses": [
+        "You can reach our support team at support@example.com. They’ll get back to you within 24 hours!",
+        "Please email our support team at support@example.com, and they’ll assist you within 24 hours.",
+        "Our support team is available at support@example.com. Expect a response within 24 hours!"
+      ],
+      "quick_replies": [
+        {"text": "Chat with an agent", "next_intent": "escalate_to_human"},
+        {"text": "View FAQs", "next_intent": "show_faqs"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "support_contact_provided",
+        "follow_up": ["escalate_to_human", "show_faqs"]
+      }
+    },
+    {
+      "tag": "how_it_works",
+      "patterns": [
+        "How does it work?", "Tell me how it works",
+        "How does the platform work?", "Explain how it works",
+        "How do I use the platform?", "How does your service work?",
+        "Tell me about the process", "How does this work?",
+        "Can you explain the platform?", "How to use the service?",
+        "How does your platform work?", "Tell me how your platform works",
+        "How do I use your platform?", "Explain how your service works",
+        "How does the service operate?", "Tell me about platform usage",
+        "How do I use your service?", "Can you explain how it operates?",
+        "How does the platform function?", "Tell me how to use the platform",
+        "How does it operate?", "Explain the platform process",
+        "How do I use the service?", "Tell me about service usage",
+        "How does your platform operate?", "Can you explain platform usage?",
+        "How do I use the AI platform?", "Tell me how the platform functions",
+        "How does the service work?", "Explain how to use the platform"
+      ],
+      "responses": [
+        "Our platform is simple to use: sign up, connect your tools (like CRM or Slack), and start using analytics, dashboards, and automation. Would you like a demo to see it in action?",
+        "It’s easy! Sign up, integrate your tools (e.g., CRM, Slack), and access analytics, dashboards, and automation features. Want to see a demo?",
+        "Here’s how it works: sign up, connect your apps, and get insights through analytics, dashboards, and automation. Interested in a demo?"
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to features", "next_intent": "ask_features"},
+        {"text": "Back to services", "next_intent": "ask_services"},
+        {"text": "Onboarding steps", "next_intent": "onboarding_steps"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "how_it_works_explained",
+        "follow_up": ["ask_demo", "onboarding_steps"]
+      }
+    },
+    {
+      "tag": "ask_discounts",
+      "patterns": [
+        "Are there any discounts?", "Do you offer discounts?",
+        "Can I get a discount?", "Any special offers?",
+        "What discounts are available?", "Do you have any promotions?",
+        "Are there discounts for small businesses?", "Any deals available?",
+        "Can you give me a discount?", "Are there any sales?",
+        "Do you have discounts?", "Are there any special deals?",
+        "Can I get a special offer?", "What promotions do you have?",
+        "Are there discounts for enterprises?", "Any offers for startups?",
+        "Can I get a deal?", "Are there any promotional offers?",
+        "Do you offer any sales?", "Are there discounts available?",
+        "Can I get a discount code?", "Are there any special promotions?",
+        "Do you have any deals?", "Are there discounts for annual plans?",
+        "Can I get a promo code?", "Are there any offers available?",
+        "Do you offer special discounts?", "Are there any current deals?",
+        "Can I get a discount for my plan?", "Are there any discount offers?"
+      ],
+      "responses": [
+        "We occasionally offer discounts for annual subscriptions or for small businesses. Would you like to request a quote to explore options?",
+        "Discounts are available for annual plans and sometimes for small businesses. Want to request a quote to see what’s available?",
+        "We do offer discounts, especially for annual subscriptions! Let’s schedule a demo to discuss your options."
+      ],
+      "quick_replies": [
+        {"text": "Request a quote", "next_intent": "ask_demo"},
+        {"text": "Back to pricing", "next_intent": "ask_pricing"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "discounts_inquired",
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "describe_issue",
+      "patterns": [
+        "Describe my issue", "Tell you about my problem",
+        "I’ll explain my issue", "Let me describe my problem",
+        "Here’s my issue", "My problem is",
+        "I’ll tell you my issue", "Let me explain my problem",
+        "Here’s what’s wrong", "This is my issue",
+        "I’ll describe my problem", "Tell you my issue",
+        "Let me tell you my problem", "Here’s the issue",
+        "My issue is", "I’ll explain what’s wrong",
+        "Let me tell you what’s wrong", "Here’s my problem",
+        "This is what’s wrong", "I’ll describe what’s wrong"
+      ],
+      "responses": [
+        "Please go ahead and describe your issue in detail, and I’ll do my best to help!",
+        "Thanks for sharing! Please describe your problem, and I’ll see how I can assist.",
+        "I’m listening! Tell me about your issue, and I’ll try to help."
+      ],
+      "quick_replies": [
+        {"text": "Connect to an agent", "next_intent": "escalate_to_human"},
+        {"text": "View FAQs", "next_intent": "show_faqs"},
+        {"text": "Troubleshooting guide", "next_intent": "troubleshoot_issue"},
+        {"text": "Back to support", "next_intent": "ask_support"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "issue_described",
+        "follow_up": ["escalate_to_human", "show_faqs", "troubleshoot_issue"]
+      }
+    },
+    {
+      "tag": "faq_get_started",
+      "patterns": [
+        "How to get started", "Tell me how to get started",
+        "How do I get started?", "Getting started guide",
+        "How do I start?", "Guide to get started",
+        "How to begin?", "Steps to get started",
+        "How do I start using it?", "Get started steps",
+        "How do I begin?", "Tell me about getting started",
+        "How to start using the platform?", "Guide to start",
+        "How do I start using the service?", "Steps to begin",
+        "How to get started with the platform?", "Tell me start steps",
+        "How do I start with the platform?", "Guide to begin using"
+      ],
+      "responses": [
+        "To get started, simply sign up on our website, verify your email, and follow the onboarding steps to connect your tools and set up your dashboard.",
+        "Getting started is easy: sign up, verify your email, and complete the onboarding to connect your apps and create your dashboard.",
+        "Here’s how to start: sign up on our site, verify your email, and follow the onboarding process to set up your tools and dashboard."
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Onboarding steps", "next_intent": "onboarding_steps"},
+        {"text": "Back to FAQs", "next_intent": "show_faqs"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "faq_get_started_viewed",
+        "requires": ["faqs_viewed"],
+        "follow_up": ["ask_demo", "onboarding_steps"]
+      }
+    },
+    {
+      "tag": "faq_free_plan",
+      "patterns": [
+        "Free plan details", "What’s in the free plan?",
+        "Tell me about the free plan", "What does the free plan include?",
+        "Free plan features", "What’s included in the free plan?",
+        "Details of the free plan", "What do I get with the free plan?",
+        "Tell me about free plan features", "Free plan info",
+        "What’s the free plan?", "Tell me about free plan details",
+        "What does the free plan offer?", "Free plan inclusions",
+        "What’s in the free package?", "Tell me about the free package",
+        "What features in the free plan?", "Free plan benefits",
+        "What’s included in free plan?", "Tell me about free plan benefits"
+      ],
+      "responses": [
+        "The free plan includes basic analytics and limited CRM features, perfect for small teams to get started.",
+        "With the free plan, you get basic analytics and limited CRM functionality, ideal for small teams.",
+        "Our free plan offers basic analytics and some CRM features, great for small teams starting out."
+      ],
+      "quick_replies": [
+        {"text": "Compare with paid plans", "next_intent": "ask_pricing"},
+        {"text": "Back to FAQs", "next_intent": "show_faqs"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "faq_free_plan_viewed",
+        "requires": ["faqs_viewed"],
+        "follow_up": ["ask_pricing"]
+      }
+    },
+    {
+      "tag": "customization_details",
+      "patterns": [
+        "Learn more about customization", "Tell me more about customization",
+        "Customization details", "More info on customization",
+        "What can I customize?", "How does customization work?",
+        "Tell me about custom features", "Customization options",
+        "More about customization", "What customization is available?",
+        "Tell me about custom dashboards", "How can I customize it?",
+        "What customization options do you have?", "Tell me about custom workflows",
+        "How does customization work on the platform?", "What can I personalize?",
+        "Tell me about platform custom features", "Customization info",
+        "More details on customization", "What customization options are there?"
+      ],
+      "responses": [
+        "You can customize dashboards, workflows, and even API integrations to fit your business needs. Want to see how it works in a demo?",
+        "Customization includes dashboards, workflows, and API integrations tailored to your business. Interested in a demo to explore?",
+        "Our platform lets you customize dashboards, workflows, and integrations. Would you like a demo to see it in action?"
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to customization", "next_intent": "customization_query"},
+        {"text": "Back to features", "next_intent": "ask_features"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "customization_details_viewed",
+        "requires": ["customization_inquired"],
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "list_integrations",
+      "patterns": [
+        "View all integrations", "Show all integrations",
+        "List all integrations", "What integrations are available?",
+        "Tell me all integrations", "All integration options",
+        "Can you list the integrations?", "Show me all integrations",
+        "What are all the integrations?", "List of integrations",
+        "Show integration list", "Tell me about all integrations",
+        "What integrations do you have?", "List the integration options",
+        "Can you show all integrations?", "Tell me the integration list",
+        "What are the available integrations?", "Show me the integration options",
+        "List all integration tools", "Tell me about integration options"
+      ],
+      "responses": [
+        "We support integrations with Slack, Zapier, Salesforce, Google Workspace, Microsoft Teams, HubSpot, Trello, and over 50 other tools.",
+        "Our platform integrates with Slack, Zapier, Salesforce, Google Workspace, Microsoft Teams, HubSpot, Trello, and more—over 50 tools in total!",
+        "You can integrate with Slack, Zapier, Salesforce, Google Workspace, Microsoft Teams, HubSpot, Trello, and 50+ other apps."
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to integrations", "next_intent": "integration_query"},
+        {"text": "Back to features", "next_intent": "ask_features"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "integrations_listed",
+        "requires": ["integrations_inquired"],
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "ask_use_cases",
+      "patterns": [
+        "What are the use cases?", "Tell me about use cases",
+        "What can I use it for?", "What are the applications?",
+        "Tell me about platform use cases", "What are some use cases?",
+        "How can I use the platform?", "What are the use cases for it?",
+        "Tell me about your use cases", "What can the platform be used for?",
+        "What are the platform applications?", "Tell me about use case examples",
+        "How can I use your platform?", "What are some platform use cases?",
+        "Tell me about application examples", "What can I do with the platform?",
+        "What are the use cases for your platform?", "Tell me how to use it",
+        "What are some examples of use cases?", "How can I apply the platform?"
+      ],
+      "responses": [
+        "Our platform is used for sales tracking, customer support automation, marketing analytics, and operational efficiency. Want to explore a specific use case?",
+        "You can use our platform for sales tracking, automating customer support, marketing analytics, and improving operations. Interested in a particular use case?",
+        "Common use cases include sales tracking, customer support automation, marketing analytics, and operational workflows. Which one would you like to explore?"
+      ],
+      "quick_replies": [
+        {"text": "Sales tracking", "next_intent": "use_case_sales"},
+        {"text": "Customer support", "next_intent": "use_case_support"},
+        {"text": "Marketing analytics", "next_intent": "use_case_marketing"},
+        {"text": "Operational efficiency", "next_intent": "use_case_operations"},
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "use_cases_explored",
+        "follow_up": ["use_case_sales", "use_case_support", "use_case_marketing", "use_case_operations"]
+      }
+    },
+    {
+      "tag": "use_case_sales",
+      "patterns": [
+        "Sales tracking", "Tell me about sales tracking",
+        "How can I use it for sales?", "Sales use case",
+        "Tell me about sales use case", "How does it help with sales?",
+        "Can I use it for sales tracking?", "Sales tracking use case",
+        "Tell me about using it for sales", "How to track sales?"
+      ],
+      "responses": [
+        "Our platform helps with sales tracking by providing real-time analytics, lead management, and performance dashboards to monitor your sales pipeline.",
+        "You can use our platform for sales tracking with real-time analytics, lead management tools, and performance dashboards for your sales team.",
+        "Sales tracking is easy with our platform: get real-time analytics, manage leads, and monitor performance with custom dashboards."
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to use cases", "next_intent": "ask_use_cases"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "use_case_sales_explored",
+        "requires": ["use_cases_explored"],
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "use_case_support",
+      "patterns": [
+        "Customer support", "Tell me about customer support",
+        "How can I use it for support?", "Support use case",
+        "Tell me about support use case", "How does it help with support?",
+        "Can I use it for customer support?", "Customer support use case",
+        "Tell me about using it for support", "How to improve support?"
+      ],
+      "responses": [
+        "Our platform automates customer support with AI chatbots, ticket management, and CRM integration to streamline your support process.",
+        "You can enhance customer support with our platform using AI chatbots, ticket management, and seamless CRM integration.",
+        "For customer support, our platform offers AI chatbots, ticket management, and CRM integration to improve response times and efficiency."
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to use cases", "next_intent": "ask_use_cases"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "use_case_support_explored",
+        "requires": ["use_cases_explored"],
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "use_case_marketing",
+      "patterns": [
+        "Marketing analytics", "Tell me about marketing analytics",
+        "How can I use it for marketing?", "Marketing use case",
+        "Tell me about marketing use case", "How does it help with marketing?",
+        "Can I use it for marketing analytics?", "Marketing analytics use case",
+        "Tell me about using it for marketing", "How to analyze marketing?"
+      ],
+      "responses": [
+        "Our platform supports marketing analytics with real-time data, campaign tracking, and ROI dashboards to optimize your marketing efforts.",
+        "You can use our platform for marketing analytics with real-time data, campaign tracking, and ROI dashboards for better insights.",
+        "Marketing analytics is streamlined with our platform: get real-time data, track campaigns, and analyze ROI with custom dashboards."
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to use cases", "next_intent": "ask_use_cases"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "use_case_marketing_explored",
+        "requires": ["use_cases_explored"],
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "use_case_operations",
+      "patterns": [
+        "Operational efficiency", "Tell me about operational efficiency",
+        "How can I use it for operations?", "Operations use case",
+        "Tell me about operations use case", "How does it help with operations?",
+        "Can I use it for operational efficiency?", "Operational efficiency use case",
+        "Tell me about using it for operations", "How to improve operations?"
+      ],
+      "responses": [
+        "Our platform improves operational efficiency with workflow automation, real-time monitoring, and custom dashboards for your team.",
+        "You can enhance operational efficiency with our platform using workflow automation, real-time monitoring, and custom dashboards.",
+        "For operational efficiency, our platform offers workflow automation, real-time monitoring, and dashboards to streamline your processes."
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to use cases", "next_intent": "ask_use_cases"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "use_case_operations_explored",
+        "requires": ["use_cases_explored"],
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "show_testimonials",
+      "patterns": [
+        "Check testimonials", "Show me testimonials",
+        "What do customers say?", "Customer reviews",
+        "Tell me about testimonials", "Show customer feedback",
+        "What are the reviews?", "Can I see testimonials?",
+        "Tell me about customer reviews", "Show me customer reviews",
+        "What do users say?", "Customer testimonials",
+        "Show me what customers say", "Tell me about user feedback",
+        "Can I see customer reviews?", "Show testimonials please",
+        "What’s the feedback?", "Tell me about user reviews",
+        "Show me user testimonials", "What do clients say?"
+      ],
+      "responses": [
+        "Here’s what our customers say:\n- **John D., Small Business Owner:** 'The analytics helped us double our sales in 6 months!'\n- **Sarah K., Enterprise Manager:** 'The customization options are fantastic for our team.'\nWould you like to hear more?",
+        "Our customers love us! Here’s a sample:\n- **John D., Small Business Owner:** 'The analytics helped us double our sales in 6 months!'\n- **Sarah K., Enterprise Manager:** 'The customization options are fantastic for our team.'\nInterested in more feedback?",
+        "Check out these testimonials:\n- **John D., Small Business Owner:** 'The analytics helped us double our sales in 6 months!'\n- **Sarah K., Enterprise Manager:** 'The customization options are fantastic for our team.'\nWant to read more?"
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "testimonials_viewed",
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "troubleshoot_issue",
+      "patterns": [
+        "Troubleshooting guide", "Help me troubleshoot",
+        "How to fix my issue?", "Troubleshoot my problem",
+        "Guide to fix issues", "Troubleshooting help",
+        "Can you help troubleshoot?", "I need troubleshooting",
+        "How do I fix this?", "Troubleshooting steps"
+      ],
+      "responses": [
+        "Let’s troubleshoot your issue. Common steps include: 1) Check your internet connection, 2) Clear your browser cache, 3) Ensure your account is active. Does this help, or should I escalate?",
+        "Here’s a troubleshooting guide: 1) Verify your internet connection, 2) Clear your browser cache, 3) Confirm your account status. Did this resolve your issue?",
+        "I can help troubleshoot! Try these steps: 1) Check your internet, 2) Clear your cache, 3) Verify your account. Does this work, or do you need more help?"
+      ],
+      "quick_replies": [
+        {"text": "It worked", "next_intent": "thankyou"},
+        {"text": "Still not working", "next_intent": "escalate_to_human"},
+        {"text": "View FAQs", "next_intent": "show_faqs"},
+        {"text": "Back to support", "next_intent": "ask_support"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "troubleshooting_attempted",
+        "follow_up": ["escalate_to_human", "show_faqs"]
+      }
+    },
+    {
+      "tag": "billing_inquiry",
+      "patterns": [
+        "Billing inquiries", "I have a billing issue",
+        "Help with billing", "Billing question",
+        "I need help with billing", "Billing support",
+        "Can you help with billing?", "Issue with billing",
+        "Tell me about billing", "Billing help please"
+      ],
+      "responses": [
+        "I can assist with billing inquiries. Are you looking for payment details, an invoice, or help with a billing issue?",
+        "Let’s address your billing concern. Do you need payment details, an invoice, or assistance with a billing issue?",
+        "I’m here to help with billing. Would you like payment details, an invoice, or support with a billing problem?"
+      ],
+      "quick_replies": [
+        {"text": "Payment details", "next_intent": "billing_payment_details"},
+        {"text": "Request an invoice", "next_intent": "billing_request_invoice"},
+        {"text": "Billing issue", "next_intent": "billing_issue"},
+        {"text": "Back to pricing", "next_intent": "ask_pricing"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "billing_inquiry_started",
+        "follow_up": ["billing_payment_details", "billing_request_invoice", "billing_issue"]
+      }
+    },
+    {
+      "tag": "billing_payment_details",
+      "patterns": [
+        "Payment details", "Tell me about payment",
+        "How do I pay?", "Payment information",
+        "What are the payment details?", "Payment options",
+        "How can I make a payment?", "Tell me about payments",
+        "What payment methods do you accept?", "Payment info"
+      ],
+      "responses": [
+        "We accept payments via credit card, PayPal, and bank transfer. You can manage your payment details in your account settings.",
+        "Payments can be made using credit cards, PayPal, or bank transfer. Check your account settings to update your payment method.",
+        "You can pay with a credit card, PayPal, or bank transfer. Visit your account settings to manage your payment details."
+      ],
+      "quick_replies": [
+        {"text": "Request an invoice", "next_intent": "billing_request_invoice"},
+        {"text": "Billing issue", "next_intent": "billing_issue"},
+        {"text": "Back to billing", "next_intent": "billing_inquiry"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "billing_payment_details_viewed",
+        "requires": ["billing_inquiry_started"],
+        "follow_up": ["billing_request_invoice", "billing_issue"]
+      }
+    },
+    {
+      "tag": "billing_request_invoice",
+      "patterns": [
+        "Request an invoice", "Can I get an invoice?",
+        "I need an invoice", "Send me an invoice",
+        "How do I get an invoice?", "Invoice request",
+        "Can you provide an invoice?", "I want an invoice",
+        "Generate an invoice", "Invoice please"
+      ],
+      "responses": [
+        "I can help you request an invoice. Please provide your email address, and I’ll send it to our billing team.",
+        "Let’s get you an invoice. Can you share your email address so I can forward it to our billing team?",
+        "I’ll help with your invoice request. Please provide your email address for our billing team to send it."
+      ],
+      "form_fields": [
+        {"field": "email", "prompt": "What’s your email address?"}
+      ],
+      "entities": [
+        {"type": "email", "regex": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"}
+      ],
+      "quick_replies": [
+        {"text": "Submit email", "action": "submit_form"},
+        {"text": "Back to billing", "next_intent": "billing_inquiry"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "billing_invoice_requested",
+        "follow_up": ["thankyou"]
+      }
+    },
+    {
+      "tag": "billing_issue",
+      "patterns": [
+        "Billing issue", "I have a billing problem",
+        "Issue with billing", "Billing error",
+        "Problem with my bill", "Billing support needed",
+        "I was overcharged", "Billing discrepancy",
+        "Help with a billing issue", "Incorrect billing"
+      ],
+      "responses": [
+        "I’m sorry to hear about your billing issue. Please describe the problem, or I can connect you to our billing support team.",
+        "Let’s resolve your billing issue. Can you describe what happened, or should I connect you to our billing team?",
+        "I’ll help with your billing problem. Please explain the issue, or I can escalate it to our billing support team."
+      ],
+      "quick_replies": [
+        {"text": "Describe my issue", "next_intent": "describe_billing_issue"},
+        {"text": "Connect to billing support", "next_intent": "escalate_to_human"},
+        {"text": "Back to billing", "next_intent": "billing_inquiry"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "billing_issue_reported",
+        "follow_up": ["describe_billing_issue", "escalate_to_human"]
+      }
+    },
+    {
+      "tag": "describe_billing_issue",
+      "patterns": [
+        "Describe my billing issue", "Tell you about my billing problem",
+        "Explain my billing issue", "Here’s my billing issue",
+        "My billing problem is", "Let me describe my billing issue",
+        "I’ll explain my billing problem", "Here’s the billing issue",
+        "Tell you my billing issue", "My issue with billing"
+      ],
+      "responses": [
+        "Thanks for sharing. Please describe your billing issue in detail, and I’ll assist or escalate it to our team.",
+        "I’m here to help. Can you explain your billing issue in detail so I can assist you better?",
+        "Please go ahead and describe your billing problem, and I’ll see how I can help."
+      ],
+      "quick_replies": [
+        {"text": "Connect to billing support", "next_intent": "escalate_to_human"},
+        {"text": "Back to billing", "next_intent": "billing_inquiry"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "billing_issue_described",
+        "requires": ["billing_issue_reported"],
+        "follow_up": ["escalate_to_human"]
+      }
+    },
+    {
+      "tag": "onboarding_steps",
+      "patterns": [
+        "Onboarding steps", "What are the onboarding steps?",
+        "How do I onboard?", "Tell me about onboarding",
+        "Steps to onboard", "Guide to onboarding",
+        "How to complete onboarding?", "Onboarding process",
+        "What’s the onboarding process?", "Onboarding guide"
+      ],
+      "responses": [
+        "The onboarding process is simple: 1) Sign up and verify your email, 2) Connect your tools (e.g., CRM, Slack), 3) Set up your dashboard and start exploring features.",
+        "Here’s how to onboard: 1) Sign up and verify your email, 2) Integrate your tools like CRM or Slack, 3) Create your dashboard and begin using the platform.",
+        "Onboarding steps: 1) Sign up and verify your email, 2) Connect your apps (e.g., CRM, Slack), 3) Set up your dashboard and explore the features."
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to how it works", "next_intent": "how_it_works"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "onboarding_explained",
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "analytics_query",
+      "patterns": [
+        "Analytics details", "Tell me about analytics",
+        "What analytics do you offer?", "Analytics features",
+        "Tell me about analytics features", "How does analytics work?",
+        "What’s included in analytics?", "Analytics info",
+        "Tell me about platform analytics", "What analytics tools do you have?"
+      ],
+      "responses": [
+        "Our analytics features include real-time data tracking, customizable reports, predictive insights, and integration with your existing tools.",
+        "We offer real-time analytics with customizable reports, predictive insights, and seamless integration with your tools.",
+        "Analytics on our platform includes real-time tracking, custom reports, predictive insights, and tool integrations."
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to features", "next_intent": "ask_features"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "analytics_explained",
+        "requires": ["features_explained"],
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "dashboard_query",
+      "patterns": [
+        "Dashboard features", "Tell me about dashboards",
+        "What’s in the dashboards?", "Dashboard details",
+        "Tell me about dashboard features", "How do dashboards work?",
+        "What can I do with dashboards?", "Dashboard info",
+        "Tell me about platform dashboards", "What dashboard tools do you have?"
+      ],
+      "responses": [
+        "Our dashboards are fully customizable, offering real-time data visualization, drag-and-drop widgets, and integration with your analytics tools.",
+        "Dashboards on our platform are customizable with real-time data visualization, drag-and-drop widgets, and analytics integration.",
+        "You can create custom dashboards with real-time data visualization, drag-and-drop widgets, and seamless analytics integration."
+      ],
+      "quick_replies": [
+        {"text": "Request a demo", "next_intent": "ask_demo"},
+        {"text": "Back to features", "next_intent": "ask_features"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "dashboards_explained",
+        "requires": ["features_explained"],
+        "follow_up": ["ask_demo"]
+      }
+    },
+    {
+      "tag": "faq_integrations",
+      "patterns": [
+        "Integration FAQs", "FAQs about integrations",
+        "Tell me about integration FAQs", "Integration FAQ details",
+        "What are the integration FAQs?", "Show integration FAQs",
+        "Can I see integration FAQs?", "Tell me integration FAQ info",
+        "What integrations are supported in FAQs?", "Integration FAQ list"
+      ],
+      "responses": [
+        "Integration FAQs:\n- **What tools can I integrate with?** We support Slack, Zapier, Salesforce, and more.\n- **How do I set up integrations?** Follow the onboarding steps in your account settings.\n- **Are there additional costs for integrations?** Most are included, but some premium integrations may have fees.\nNeed more details?",
+        "Here are integration FAQs:\n- **What tools are supported?** Slack, Zapier, Salesforce, and more.\n- **How to set up integrations?** Use the onboarding guide in your account settings.\n- **Are integrations free?** Most are, but premium ones may have additional costs.\nWant to learn more?",
+        "Integration FAQs:\n- **Which tools can I integrate?** Slack, Zapier, Salesforce, and others.\n- **How do I set up integrations?** Check the onboarding steps in your account settings.\n- **Do integrations cost extra?** Most are free, but some premium ones may have fees.\nNeed further assistance?"
+      ],
+      "quick_replies": [
+        {"text": "View all integrations", "next_intent": "list_integrations"},
+        {"text": "Back to FAQs", "next_intent": "show_faqs"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "faq_integrations_viewed",
+        "requires": ["faqs_viewed"],
+        "follow_up": ["list_integrations"]
+      }
+    },
+    {
+      "tag": "provide_feedback",
+      "patterns": [
+        "Provide feedback", "I want to give feedback",
+        "Can I share feedback?", "Feedback please",
+        "How do I give feedback?", "I have feedback",
+        "Tell you my feedback", "Share my feedback",
+        "Can I provide feedback?", "I’d like to give feedback"
+      ],
+      "responses": [
+        "I’d love to hear your feedback! Please share your thoughts, or I can connect you to our feedback team.",
+        "Thanks for wanting to provide feedback! Please share your comments, or I can escalate this to our team.",
+        "Your feedback is valuable! Please tell me your thoughts, or I can connect you to our feedback team."
+      ],
+      "quick_replies": [
+        {"text": "Share my feedback", "next_intent": "submit_feedback"},
+        {"text": "Connect to feedback team", "next_intent": "escalate_to_human"},
+        {"text": "Back to main menu", "next_intent": "greet"}
+      ],
+      "context": {
+        "set": "feedback_initiated",
+        "follow_up": ["submit_feedback", "escalate_to_human"]
+      }
+    },
+    {
+      "tag": "submit_feedback",
+      "patterns": [
+        "Share my feedback", "Tell you my feedback",
+        "Here’s my feedback", "My feedback is",
+        "I’ll share my feedback", "Let me give feedback",
+        "I’ll tell you my feedback", "Here’s what I think",
+        "My thoughts are", "I’ll provide my feedback"
+      ],
+      "responses": [
+        "Thank you for your feedback! I’ll pass it along to our team. Is there anything else I can help with?",
+        "Thanks for sharing your feedback! It’s been forwarded to our team. Can I assist you with anything else?",
+        "I appreciate your feedback! It’s been sent to our team. Do you have any other questions?"
+      ],
+      "quick_replies": [
+        {"text": "Back to main menu", "next_intent": "greet"},
+        {"text": "Contact support", "next_intent": "provide_support_contact"},
+        {"text": "View FAQs", "next_intent": "show_faqs"}
+      ],
+      "context": {
+        "set": "feedback_submitted",
+        "requires": ["feedback_initiated"],
+        "follow_up": ["greet", "provide_support_contact", "show_faqs"]
+      }
+    }
+  ]
+}

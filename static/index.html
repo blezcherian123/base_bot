@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chat-container {
+            max-height: 70vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        .message {
+            animation: slideIn 0.3s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        .chat-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-container::-webkit-scrollbar-thumb {
+            background: #4a5568;
+            border-radius: 4px;
+        }
+        .chat-container::-webkit-scrollbar-track {
+            background: #edf2f7;
+        }
+        .quick-reply {
+            transition: background-color 0.2s;
+        }
+        .quick-reply:hover {
+            background-color: #bee3f8;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 flex flex-col h-[80vh]">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">AI Chatbot 🤖</h1>
+        <div id="chat-container" class="chat-container flex-1 bg-gray-50 rounded-lg p-4 overflow-y-auto">
+            <div class="message mb-4">
+                <p class="text-gray-700 bg-blue-100 rounded-lg p-3 inline-block max-w-[80%]">
+                    Hello! Welcome to our service platform. How can I assist you today?
+                </p>
+                <div class="quick-replies mt-2 flex flex-wrap gap-2">
+                    <button class="quick-reply bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm" onclick="sendQuickReply('Learn about services')">Learn about services</button>
+                    <button class="quick-reply bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm" onclick="sendQuickReply('Check pricing')">Check pricing</button>
+                    <button class="quick-reply bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm" onclick="sendQuickReply('Request a demo')">Request a demo</button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 flex">
+            <input
+                id="message-input"
+                type="text"
+                placeholder="Type your message..."
+                class="flex-1 border border-gray-300 rounded-l-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onkeypress="if(event.key === 'Enter') sendMessage()"
+            />
+            <button
+                onclick="sendMessage()"
+                class="bg-blue-500 text-white rounded-r-lg px-4 py-3 hover:bg-blue-600 transition"
+            >
+                Send
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const messageInput = document.getElementById('message-input');
+
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user', []);
+            messageInput.value = '';
+
+            // Show typing indicator
+            const typingDiv = addTypingIndicator();
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+                const data = await response.json();
+
+                // Remove typing indicator
+                typingDiv.remove();
+
+                // Add bot response with quick replies
+                addMessage(data.response, 'bot', data.quick_replies);
+
+                // Check if user wants to quit
+                if (message.toLowerCase() === 'quit') {
+                    messageInput.disabled = true;
+                    messageInput.placeholder = 'Chat ended. Refresh to start again.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                typingDiv.remove();
+                addMessage('Sorry, something went wrong. Please try again.', 'bot', []);
+            }
+
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        async function sendQuickReply(text) {
+            messageInput.value = text;
+            await sendMessage();
+        }
+
+        function addMessage(text, sender, quickReplies) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message mb-4 ${sender === 'user' ? 'text-right' : ''}`;
+            let html = `
+                <p class="${
+                    sender === 'user'
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-blue-100 text-gray-700'
+                } rounded-lg p-3 inline-block max-w-[80%]">${text}</p>
+            `;
+            if (quickReplies.length > 0) {
+                html += `<div class="quick-replies mt-2 flex flex-wrap gap-2">`;
+                quickReplies.forEach(reply => {
+                    html += `<button class="quick-reply bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm" onclick="sendQuickReply('${reply.text}')">${reply.text}</button>`;
+                });
+                html += `</div>`;
+            }
+            messageDiv.innerHTML = html;
+            chatContainer.appendChild(messageDiv);
+        }
+
+        function addTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message mb-4';
+            typingDiv.innerHTML = `
+                <p class="bg-blue-100 text-gray-700 rounded-lg p-3 inline-block max-w-[80%] typing">
+                    Bot is typing...
+                </p>
+            `;
+            chatContainer.appendChild(typingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            return typingDiv;
+        }
+    </script>
+</body>
+</html>

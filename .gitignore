@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+*.env
+*.env.*
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Model and data files
+model.pkl
+label_encoder.pkl
+tfidf_vectorizer.pkl
+responses.pkl
+
+# Logs
+*.log
+
+# FastAPI/Starlette
+instance/
+*.db
+
+# Node modules (if any frontend JS tooling is added)
+node_modules/
+
+# Static build artifacts
+/build/
+dist/
+*.tar.gz
+*.zip
