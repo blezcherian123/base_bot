@@ -3,163 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chatbot</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>AI Chatbot 🤖</title>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
         }
         .chat-container {
-            max-height: 70vh;
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .chat-header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .chat-messages {
+            max-height: 400px;
             overflow-y: auto;
-            scroll-behavior: smooth;
+            margin-bottom: 20px;
         }
         .message {
-            animation: slideIn 0.3s ease-in-out;
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
         }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .bot-message {
+            background-color: #e6f0fa;
+            margin-right: auto;
         }
-        .typing::after {
-            content: '|';
-            animation: blink 1s infinite;
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            margin-left: auto;
         }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-        .chat-container::-webkit-scrollbar {
-            width: 8px;
-        }
-        .chat-container::-webkit-scrollbar-thumb {
-            background: #4a5568;
-            border-radius: 4px;
-        }
-        .chat-container::-webkit-scrollbar-track {
-            background: #edf2f7;
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
         }
         .quick-reply {
-            transition: background-color 0.2s;
+            background-color: #e6f0fa; /* Brighter background */
+            color: #1a1a1a; /* Darker text for better contrast */
+            border: 1px solid #0056b3; /* Slightly darker border */
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500; /* Slightly bolder text */
+            transition: background-color 0.2s, transform 0.1s;
         }
         .quick-reply:hover {
-            background-color: #bee3f8;
+            background-color: #d0e4ff; /* Even brighter on hover */
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 20px;
+            outline: none;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 flex flex-col h-[80vh]">
-        <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">AI Chatbot 🤖</h1>
-        <div id="chat-container" class="chat-container flex-1 bg-gray-50 rounded-lg p-4 overflow-y-auto">
-            <div class="message mb-4">
-                <p class="text-gray-700 bg-blue-100 rounded-lg p-3 inline-block max-w-[80%]">
-                    Hello! Welcome to our service platform. How can I assist you today?
-                </p>
-                <div class="quick-replies mt-2 flex flex-wrap gap-2">
-                    <button class="quick-reply bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm" onclick="sendQuickReply('Learn about services')">Learn about services</button>
-                    <button class="quick-reply bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm" onclick="sendQuickReply('Check pricing')">Check pricing</button>
-                    <button class="quick-reply bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm" onclick="sendQuickReply('Request a demo')">Request a demo</button>
-                </div>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            AI Chatbot 🤖
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                Hello! Welcome to our service platform. How can I assist you today?
+            </div>
+            <div class="quick-replies" id="quickReplies">
+                <button class="quick-reply" data-intent="ask_services">Learn about services</button>
+                <button class="quick-reply" data-intent="ask_pricing">Check pricing</button>
+                <button class="quick-reply" data-intent="ask_demo">Request a demo</button>
+                <button class="quick-reply" data-intent="ask_support">Get support</button>
+                <button class="quick-reply" data-intent="ask_features">Tell me about features</button>
+                <button class="quick-reply" data-intent="show_faqs">View FAQs</button>
+                <button class="quick-reply" data-intent="ask_use_cases">Explore use cases</button>
+                <button class="quick-reply" data-intent="show_testimonials">Check testimonials</button>
             </div>
         </div>
-        <div class="mt-4 flex">
-            <input
-                id="message-input"
-                type="text"
-                placeholder="Type your message..."
-                class="flex-1 border border-gray-300 rounded-l-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                onkeypress="if(event.key === 'Enter') sendMessage()"
-            />
-            <button
-                onclick="sendMessage()"
-                class="bg-blue-500 text-white rounded-r-lg px-4 py-3 hover:bg-blue-600 transition"
-            >
-                Send
-            </button>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
         </div>
     </div>
 
     <script>
-        const chatContainer = document.getElementById('chat-container');
-        const messageInput = document.getElementById('message-input');
+        const chatMessages = document.getElementById('chatMessages');
+        const quickReplies = document.getElementById('quickReplies');
+        const userInput = document.getElementById('userInput');
 
+        // Map of intents to representative patterns
+        const intentToPatternMap = {
+            "ask_services": "What services do you offer?",
+            "ask_pricing": "How much does it cost?",
+            "ask_demo": "Can I get a demo?",
+            "ask_support": "I need help",
+            "ask_features": "What are the features?",
+            "show_faqs": "View FAQs",
+            "ask_use_cases": "What are the use cases?",
+            "show_testimonials": "Check testimonials",
+            "provide_support_contact": "How can I contact support?",
+            "greet": "Hello",
+            "thankyou": "Thanks",
+            "escalate_to_human": "Talk to a human",
+            "provide_feedback": "I want to give feedback",
+            "submit_feedback": "Share my feedback",
+            "back_to_main_menu": "Back to main menu"
+        };
+
+        // Function to send a message to the backend
         async function sendMessage() {
-            const message = messageInput.value.trim();
+            const message = userInput.value.trim();
             if (!message) return;
 
-            // Add user message
-            addMessage(message, 'user', []);
-            messageInput.value = '';
+            // Add user message to chat
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'message user-message';
+            userMessageDiv.textContent = message;
+            chatMessages.appendChild(userMessageDiv);
 
-            // Show typing indicator
-            const typingDiv = addTypingIndicator();
-
-            try {
-                const response = await fetch('/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message })
-                });
-                const data = await response.json();
-
-                // Remove typing indicator
-                typingDiv.remove();
-
-                // Add bot response with quick replies
-                addMessage(data.response, 'bot', data.quick_replies);
-
-                // Check if user wants to quit
-                if (message.toLowerCase() === 'quit') {
-                    messageInput.disabled = true;
-                    messageInput.placeholder = 'Chat ended. Refresh to start again.';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                typingDiv.remove();
-                addMessage('Sorry, something went wrong. Please try again.', 'bot', []);
-            }
+            // Clear input
+            userInput.value = '';
 
             // Scroll to bottom
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
+            chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        async function sendQuickReply(text) {
-            messageInput.value = text;
-            await sendMessage();
-        }
-
-        function addMessage(text, sender, quickReplies) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message mb-4 ${sender === 'user' ? 'text-right' : ''}`;
-            let html = `
-                <p class="${
-                    sender === 'user'
-                        ? 'bg-blue-500 text-white'
-                        : 'bg-blue-100 text-gray-700'
-                } rounded-lg p-3 inline-block max-w-[80%]">${text}</p>
-            `;
-            if (quickReplies.length > 0) {
-                html += `<div class="quick-replies mt-2 flex flex-wrap gap-2">`;
-                quickReplies.forEach(reply => {
-                    html += `<button class="quick-reply bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm" onclick="sendQuickReply('${reply.text}')">${reply.text}</button>`;
+            try {
+                // Send message to backend
+                const response = await fetch('http://localhost:8000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: message })
                 });
-                html += `</div>`;
+
+                const data = await response.json();
+
+                // Add bot response to chat
+                const botMessageDiv = document.createElement('div');
+                botMessageDiv.className = 'message bot-message';
+                botMessageDiv.textContent = data.response;
+                chatMessages.appendChild(botMessageDiv);
+
+                // Update quick replies
+                quickReplies.innerHTML = '';
+                data.quick_replies.forEach(reply => {
+                    const button = document.createElement('button');
+                    button.className = 'quick-reply';
+                    button.textContent = reply.text;
+                    button.setAttribute('data-intent', reply.next_intent);
+                    button.addEventListener('click', () => handleQuickReply(reply.next_intent, reply.text));
+                    quickReplies.appendChild(button);
+                });
+
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } catch (error) {
+                console.error('Error:', error);
+                const errorMessageDiv = document.createElement('div');
+                errorMessageDiv.className = 'message bot-message';
+                errorMessageDiv.textContent = 'Sorry, something went wrong. Please try again.';
+                chatMessages.appendChild(errorMessageDiv);
             }
-            messageDiv.innerHTML = html;
-            chatContainer.appendChild(messageDiv);
         }
 
-        function addTypingIndicator() {
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message mb-4';
-            typingDiv.innerHTML = `
-                <p class="bg-blue-100 text-gray-700 rounded-lg p-3 inline-block max-w-[80%] typing">
-                    Bot is typing...
-                </p>
-            `;
-            chatContainer.appendChild(typingDiv);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-            return typingDiv;
+        // Function to handle quick reply clicks
+        async function handleQuickReply(intent, buttonText) {
+            // Map the intent to a natural language pattern
+            const message = intentToPatternMap[intent] || intent;
+
+            // Add the button text as the user message (for display purposes)
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'message user-message';
+            userMessageDiv.textContent = buttonText; // Show the button text instead of the intent
+            chatMessages.appendChild(userMessageDiv);
+
+            try {
+                // Send the mapped pattern to the backend
+                const response = await fetch('http://localhost:8000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: message })
+                });
+
+                const data = await response.json();
+
+                // Add bot response to chat
+                const botMessageDiv = document.createElement('div');
+                botMessageDiv.className = 'message bot-message';
+                botMessageDiv.textContent = data.response;
+                chatMessages.appendChild(botMessageDiv);
+
+                // Update quick replies
+                quickReplies.innerHTML = '';
+                data.quick_replies.forEach(reply => {
+                    const button = document.createElement('button');
+                    button.className = 'quick-reply';
+                    button.textContent = reply.text;
+                    button.setAttribute('data-intent', reply.next_intent);
+                    button.addEventListener('click', () => handleQuickReply(reply.next_intent, reply.text));
+                    quickReplies.appendChild(button);
+                });
+
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } catch (error) {
+                console.error('Error:', error);
+                const errorMessageDiv = document.createElement('div');
+                errorMessageDiv.className = 'message bot-message';
+                errorMessageDiv.textContent = 'Sorry, something went wrong. Please try again.';
+                chatMessages.appendChild(errorMessageDiv);
+            }
         }
+
+        // Add event listener for Enter key
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Add event listeners to initial quick replies
+        document.querySelectorAll('.quick-reply').forEach(button => {
+            button.addEventListener('click', () => {
+                const intent = button.getAttribute('data-intent');
+                const buttonText = button.textContent;
+                handleQuickReply(intent, buttonText);
+            });
+        });
     </script>
 </body>
 </html>

@@ -80,18 +80,37 @@ class ChatRequest(BaseModel):
 
 def get_response(user_input: str) -> dict:
     try:
-        vector = vectorizer.transform([user_input])
-        prediction = model.predict(vector)
-        tag = label_encoder.inverse_transform(prediction)[0]
+        # Check if the input matches an intent tag directly (as a fallback)
+        intent_tags = []
+        for intent in intents_data["intents"]:
+            tags = intent["tag"]
+            if isinstance(tags, str):
+                tags = [tags]
+            intent_tags.extend(tags)
         
+        predicted_tag = None
+        if user_input in intent_tags:
+            predicted_tag = user_input
+            logger.info(f"Direct intent match: {predicted_tag}")
+        else:
+            # Use the model to predict the intent
+            vector = vectorizer.transform([user_input])
+            prediction = model.predict(vector)
+            predicted_tag = label_encoder.inverse_transform(prediction)[0]
+            logger.info(f"Model predicted intent: {predicted_tag} for input: {user_input}")
+
+        # Find the matching intent and its quick replies
         quick_replies = []
         for intent in intents_data["intents"]:
-            if tag in (intent["tag"] if isinstance(intent["tag"], list) else [intent["tag"]]):
+            tags = intent["tag"]
+            if isinstance(tags, str):
+                tags = [tags]
+            if predicted_tag in tags:
                 quick_replies = intent.get("quick_replies", [])
                 break
-        
+
         return {
-            "response": random.choice(responses[tag]),
+            "response": random.choice(responses[predicted_tag]),
             "quick_replies": quick_replies
         }
     except Exception as e:
@@ -113,4 +132,4 @@ async def root():
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy"}    
+    return {"status": "healthy"}
